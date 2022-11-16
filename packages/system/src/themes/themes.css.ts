@@ -1,16 +1,18 @@
 import { createTheme, createThemeContract } from "@vanilla-extract/css"
 import { angularColorPalette } from "./angular-color-scheme"
-import { qwikColorPalette } from "./qwik-color-scheme"
 import { landingColorPalette } from "./landing-color-scheme"
+import { nodejsColorPalette } from "./nodejs-color-scheme"
+import { qwikColorPalette } from "./qwik-color-scheme"
 import { reactColorPalette } from "./react-color-scheme"
 import { solidJSColorPalette } from "./solidjs-color-scheme"
+import { svelteColorPalette } from "./svelte-color-scheme"
+import { graphqlColorPalette } from "./graphql-color-scheme"
 import {
 	blankPalette,
 	darkThemeFromPalette,
 	lightThemeFromPalette,
 } from "./theme-from-palette"
 import { vueColorPalette } from "./vue-color-scheme"
-import { svelteColorPalette } from "./svelte-color-scheme"
 
 export const vars = createThemeContract(lightThemeFromPalette(blankPalette))
 
@@ -72,6 +74,26 @@ export const svelteTheme = createTheme(
 export const svelteThemeDark = createTheme(
 	vars,
 	darkThemeFromPalette(svelteColorPalette)
+)
+
+export const nodejsTheme = createTheme(
+	vars,
+	lightThemeFromPalette(nodejsColorPalette)
+)
+
+export const nodejsThemeDark = createTheme(
+	vars,
+	darkThemeFromPalette(nodejsColorPalette)
+)
+
+export const graphqlTheme = createTheme(
+	vars,
+	lightThemeFromPalette(graphqlColorPalette)
+)
+
+export const graphqlThemeDark = createTheme(
+	vars,
+	darkThemeFromPalette(graphqlColorPalette)
 )
 
 export const landingTheme = createTheme(
