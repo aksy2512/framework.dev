@@ -1,5 +1,9 @@
 import classNames from "classnames"
-import React from "react"
+import React,{useState, useEffect} from "react"
+import fetch from "node-fetch"
+// var cors = require('cors')
+
+// app.use(cors())
 import {
 	homepageContentContainerStyle,
 	homepageGutterStyle,
@@ -27,6 +31,7 @@ import { sprinkles } from "../../sprinkles/sprinkles.css"
 import { ResourcesInfoBanner } from "../landing/resources-info-banner"
 import { LinkCardProps } from "../landing/link-card"
 import { LogoIcon } from "../../icons/logo-icon"
+import { method } from "lodash"
 
 export interface HomepageProps extends React.ComponentPropsWithoutRef<"div"> {
 	librariesTitle: string
@@ -41,7 +46,6 @@ export interface HomepageProps extends React.ComponentPropsWithoutRef<"div"> {
 	siteName: string
 	resourceCards: LinkCardProps[]
 }
-
 export function Homepage({
 	className,
 	librariesTitle,
@@ -65,9 +69,49 @@ export function Homepage({
 		},
 		backgroundColor: "#F6FDFF",
 		color: "#2E3132",
+		
 	})
-
+	const [contributors , set_constributors] = useState<any>([]);
+	
+const apiGet = () =>{
+	 fetch('https://api.github.com/repos/thisdot/framework.dev/contributors?anon=true')
+	.then(res=> res.json())
+	.then(json=> {
+		console.log(json);
+		set_constributors(json);
+		console.log(contributors);
+	})
+};
+apiGet()
+useEffect(() => {
+	const abortController = new AbortController();
+	async function fetchData(){
+		const response = await fetch(`https://api.github.com/repos/thisdot/framework.dev/contributors?anon=1`,{
+		method: "POST",
+		headers: {
+			"Content-Type": "application/json",
+			Accept: "application/json",
+		},
+	})
+	.then((res) => res.json())
+	.catch((error) => {
+	if (error.name === "AbortError") {
+						return
+					}
+				})
+	.then(json => {console.log(json),
+		set_constributors(json)
+	})
+		
+	
+	  }
+	// console.log("use ,e")
+	// set_constributors(data)
+  },[contributors,set_constributors]);
+  console.log(contributors)
 	return (
+		<div>
+		{/* {apiGet()} */}
 		<div className={classNames(className, homepageStyle)} {...props}>
 			<div
 				className={classNames(
@@ -78,6 +122,7 @@ export function Homepage({
 					})
 				)}
 			>
+				{/* <br />{	JSON.stringify(contributors)} */}
 				<Search />
 			</div>
 			<div className={sprinkles({ backgroundColor: "surface5" })}>
@@ -121,6 +166,7 @@ export function Homepage({
 					})}
 				/>
 			</div>
+		</div>
 		</div>
 	)
 }
