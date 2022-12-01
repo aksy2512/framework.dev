@@ -1,5 +1,5 @@
 import classNames from "classnames"
-import React,{useState, useEffect} from "react"
+import React, { useState, useEffect } from "react"
 import fetch from "node-fetch"
 // var cors = require('cors')
 
@@ -69,104 +69,111 @@ export function Homepage({
 		},
 		backgroundColor: "#F6FDFF",
 		color: "#2E3132",
-		
 	})
-	const [contributors , set_constributors] = useState<any>([]);
-	
-const apiGet = () =>{
-	 fetch('https://api.github.com/repos/thisdot/framework.dev/contributors?anon=true')
-	.then(res=> res.json())
-	.then(json=> {
-		console.log(json);
-		set_constributors(json);
-		console.log(contributors);
-	})
-};
-apiGet()
-useEffect(() => {
-	const abortController = new AbortController();
-	async function fetchData(){
-		const response = await fetch(`https://api.github.com/repos/thisdot/framework.dev/contributors?anon=1`,{
-		method: "POST",
-		headers: {
-			"Content-Type": "application/json",
-			Accept: "application/json",
-		},
-	})
-	.then((res) => res.json())
-	.catch((error) => {
-	if (error.name === "AbortError") {
-						return
-					}
-				})
-	.then(json => {console.log(json),
-		set_constributors(json)
-	})
-		
-	
-	  }
-	// console.log("use ,e")
-	// set_constributors(data)
-  },[contributors,set_constributors]);
-  console.log(contributors)
+	// creating contributor state to store json
+	const [contributors, set_constributors] = useState<any>([])
+   // function to fetch the api 
+	const apiGet = () => {
+		fetch(
+			"https://api.github.com/repos/thisdot/framework.dev/contributors?anon=true"
+		)
+			.then((res) => res.json())
+			.then((json) => {
+				// printing out the data fetched 
+				console.log(json)
+				// setting the contributors state 
+				set_constributors(json)
+				//Problem - contributors state is not set 
+				console.log(contributors)
+			})
+	}
+	apiGet()
+
+	// Uncomment the below code to see whether useEffect is working or not 
+	// Problem - It is not working even console.log is not working
+	// useEffect(() => {
+	// 	const abortController = new AbortController();
+	// 	async function fetchData(){
+	// 		const response = await fetch(`https://api.github.com/repos/thisdot/framework.dev/contributors?anon=1`,{
+	// 		method: "POST",
+	// 		headers: {
+	// 			"Content-Type": "application/json",
+	// 			Accept: "application/json",
+	// 		},
+	// 	})
+	// 	.then((res) => res.json())
+	// 	.catch((error) => {
+	// 	if (error.name === "AbortError") {
+	// 						return
+	// 					}
+	// 				})
+	// 	.then(json => {console.log(json),
+	// 		set_constributors(json)
+	// 	})
+
+	// 	  }
+	// 	// console.log("use ,e")
+	// 	// set_constributors(data)
+	//   },[contributors,set_constributors]);
+	console.log(contributors)
 	return (
 		<div>
-		{/* {apiGet()} */}
-		<div className={classNames(className, homepageStyle)} {...props}>
-			<div
-				className={classNames(
-					homepageGutterStyle,
-					sprinkles({
-						paddingBottom: { mobile: 24, desktop: 16 },
-						paddingTop: { mobile: 0, desktop: 16 },
-					})
-				)}
-			>
-				{/* <br />{	JSON.stringify(contributors)} */}
-				<Search />
-			</div>
-			<div className={sprinkles({ backgroundColor: "surface5" })}>
-				<Hero siteName={siteName} className={homepageGutterStyle} />
-			</div>
-			<div
-				className={classNames(
-					homepageContentContainerStyle,
-					homepageGutterStyle
-				)}
-			>
-				<FeaturedLibraries
-					libraries={libraries}
-					libraryTags={libraryTags}
-					title={librariesTitle}
-				/>
-				<Podcasts podcasts={podcasts} />
-				<div className={homepageTwoAndOneSectionStyle}>
-					<Courses courses={courses} />
-					<Blogs blogs={blogs} />
+			{/* {apiGet()} */}
+			<div className={classNames(className, homepageStyle)} {...props}>
+				<div
+					className={classNames(
+						homepageGutterStyle,
+						sprinkles({
+							paddingBottom: { mobile: 24, desktop: 16 },
+							paddingTop: { mobile: 0, desktop: 16 },
+						})
+					)}
+				>
+					{/* <br />{	JSON.stringify(contributors)} */}
+					<Search />
 				</div>
-				<ContributorBanner
-					contributorImages={[
-						"https://github.com/jbachhardie.png",
-						"https://github.com/tvanantwerp.png",
-						"https://github.com/markshenouda.png",
-					]}
-				></ContributorBanner>
-				<div className={homepageTwoAndOneSectionStyle}>
-					<Books books={books} />
-					<LatestTools tools={tools} />
+				<div className={sprinkles({ backgroundColor: "surface5" })}>
+					<Hero siteName={siteName} className={homepageGutterStyle} />
 				</div>
-				<Communities communities={communities} />
+				<div
+					className={classNames(
+						homepageContentContainerStyle,
+						homepageGutterStyle
+					)}
+				>
+					<FeaturedLibraries
+						libraries={libraries}
+						libraryTags={libraryTags}
+						title={librariesTitle}
+					/>
+					<Podcasts podcasts={podcasts} />
+					<div className={homepageTwoAndOneSectionStyle}>
+						<Courses courses={courses} />
+						<Blogs blogs={blogs} />
+					</div>
+					<ContributorBanner
+						contributorImages={[
+							"https://github.com/jbachhardie.png",
+							"https://github.com/tvanantwerp.png",
+							"https://github.com/markshenouda.png",
+						]}
+					></ContributorBanner>
+					<div className={homepageTwoAndOneSectionStyle}>
+						<Books books={books} />
+						<LatestTools tools={tools} />
+					</div>
+					<Communities communities={communities} />
 
-				<ResourcesInfoBanner
-					title="Other Frameworks"
-					description="Explore some of the top resources added by a community to learn or be up to date with your framework"
-					resourceCards={resourceCards}
-					className={sprinkles({
-						borderRadius: 40,
-					})}
-				/>
+					<ResourcesInfoBanner
+						title="Other Frameworks"
+						description="Explore some of the top resources added by a community to learn or be up to date with your framework"
+						resourceCards={resourceCards}
+						className={sprinkles({
+							borderRadius: 40,
+						})}
+					/>
+				</div>
 			</div>
-		</div>
 		</div>
 	)
 }
