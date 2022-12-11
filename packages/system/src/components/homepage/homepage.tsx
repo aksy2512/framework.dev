@@ -1,9 +1,7 @@
 import classNames from "classnames"
 import React, { useState, useEffect } from "react"
 import fetch from "node-fetch"
-// var cors = require('cors')
-
-// app.use(cors())
+import {data} from "../../../../site/src/pages/index.astro"
 import {
 	homepageContentContainerStyle,
 	homepageGutterStyle,
@@ -46,6 +44,13 @@ export interface HomepageProps extends React.ComponentPropsWithoutRef<"div"> {
 	siteName: string
 	resourceCards: LinkCardProps[]
 }
+const contributors = [];
+function display_components(props){
+	for(let i=0;i<props.length;i++)
+	{
+		contributors.push(props[i].avatar_url);
+	}
+}
 export function Homepage({
 	className,
 	librariesTitle,
@@ -70,55 +75,8 @@ export function Homepage({
 		backgroundColor: "#F6FDFF",
 		color: "#2E3132",
 	})
-	// creating contributor state to store json
-	const [contributors, set_constributors] = useState<any>([])
-   // function to fetch the api 
-	const apiGet = () => {
-		fetch(
-			"https://api.github.com/repos/thisdot/framework.dev/contributors?anon=true"
-		)
-			.then((res) => res.json())
-			.then((json) => {
-				// printing out the data fetched 
-				console.log(json)
-				// setting the contributors state 
-				set_constributors(json)
-				//Problem - contributors state is not set 
-				console.log(contributors)
-			})
-	}
-	apiGet()
-
-	// Uncomment the below code to see whether useEffect is working or not 
-	// Problem - It is not working even console.log is not working
-	// useEffect(() => {
-	// 	const abortController = new AbortController();
-	// 	async function fetchData(){
-	// 		const response = await fetch(`https://api.github.com/repos/thisdot/framework.dev/contributors?anon=1`,{
-	// 		method: "POST",
-	// 		headers: {
-	// 			"Content-Type": "application/json",
-	// 			Accept: "application/json",
-	// 		},
-	// 	})
-	// 	.then((res) => res.json())
-	// 	.catch((error) => {
-	// 	if (error.name === "AbortError") {
-	// 						return
-	// 					}
-	// 				})
-	// 	.then(json => {console.log(json),
-	// 		set_constributors(json)
-	// 	})
-
-	// 	  }
-	// 	// console.log("use ,e")
-	// 	// set_constributors(data)
-	//   },[contributors,set_constributors]);
-	console.log(contributors)
 	return (
 		<div>
-			{/* {apiGet()} */}
 			<div className={classNames(className, homepageStyle)} {...props}>
 				<div
 					className={classNames(
@@ -129,7 +87,6 @@ export function Homepage({
 						})
 					)}
 				>
-					{/* <br />{	JSON.stringify(contributors)} */}
 					<Search />
 				</div>
 				<div className={sprinkles({ backgroundColor: "surface5" })}>
@@ -152,11 +109,12 @@ export function Homepage({
 						<Blogs blogs={blogs} />
 					</div>
 					<ContributorBanner
-						contributorImages={[
-							"https://github.com/jbachhardie.png",
-							"https://github.com/tvanantwerp.png",
-							"https://github.com/markshenouda.png",
-						]}
+						// contributorImages={[
+						// 	"https://github.com/jbachhardie.png",
+						// 	"https://github.com/tvanantwerp.png",
+						// 	"https://github.com/markshenouda.png",
+						// ]}
+						contributors
 					></ContributorBanner>
 					<div className={homepageTwoAndOneSectionStyle}>
 						<Books books={books} />
