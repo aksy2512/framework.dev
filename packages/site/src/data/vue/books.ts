@@ -10,11 +10,11 @@ export const bookTags = [
 	"patterns",
 	"state management",
 	"forms",
-	"Vue 2",
-	"Vue 3",
+	"vue 2",
+	"vue 3",
 	"vite",
-	"typescript",
-	"graphQL",
+	"TypeScript",
+	"GraphQL",
 ] as const
 
 export const books: Book<typeof bookTags[number]>[] = [
@@ -28,7 +28,7 @@ export const books: Book<typeof bookTags[number]>[] = [
 		numberOfPages: 174,
 		level: "beginner",
 		href: "https://www.oreilly.com/library/view/vuejs-up-and/9781491997239/",
-		tags: ["projects", "vuex", "routing", "testing", "Vue 2"],
+		tags: ["projects", "vuex", "routing", "testing", "vue 2"],
 	},
 	{
 		title: "Vue The Road To Enterprise",
@@ -46,8 +46,8 @@ export const books: Book<typeof bookTags[number]>[] = [
 			"patterns",
 			"testing",
 			"authentication",
-			"Vue 2",
-			"Vue 3",
+			"vue 2",
+			"vue 3",
 		],
 	},
 	{
@@ -61,7 +61,7 @@ export const books: Book<typeof bookTags[number]>[] = [
 		numberOfPages: 110,
 		level: "beginner",
 		href: "https://www.amazon.com/Building-Forms-Vue-js-Patterns-building-ebook/dp/B07YY7MGDD",
-		tags: ["vuex", "forms", "patterns", "Vue 2"],
+		tags: ["vuex", "forms", "patterns", "vue 2"],
 	},
 	{
 		title: "Fullstack Vue",
@@ -78,11 +78,11 @@ export const books: Book<typeof bookTags[number]>[] = [
 			"vuex",
 			"forms",
 			"testing",
-			"Vue 2",
-			"Vue 3",
+			"vue 2",
+			"vue 3",
 			"routing",
-			"typescript",
-			"graphQL",
+			"TypeScript",
+			"GraphQL",
 		],
 	},
 	{
@@ -98,12 +98,24 @@ export const books: Book<typeof bookTags[number]>[] = [
 		href: "https://books.ninja-squad.com/vue",
 		tags: [
 			"best practices",
-			"Vue 3",
-			"typescript",
+			"vue 3",
+			"TypeScript",
 			"vite",
 			"routing",
 			"testing",
 			"state management",
 		],
+	},
+	{
+		title: "Vue.js design and implementation",
+		authors: ["Huo Chunyang (HcySunYang)"],
+		image: "https://file.ituring.com.cn/LargeCover/220221aede71623dcf92",
+		description:
+			"This book is based on Vue.js 3. It includes a large number of illustrations and explains step by step the realization of each functional module in Vue.js. This book also analyzes the framework design principles in detail.  By reading this book, developers with hands-on experience with Vue.js 2/3 can further understand the implementation details of the Vue.js framework. Front-end developers who have no experience in using Vue.js but are interested in framework design can quickly master Vue.js design principles.",
+		yearOfPublication: 2022,
+		numberOfPages: 501,
+		level: "intermediate",
+		href: "https://www.ituring.com.cn/book/2953",
+		tags: ["vue 3"],
 	},
 ]
